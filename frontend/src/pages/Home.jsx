@@ -10,6 +10,7 @@ import Login from "./Login";
 import UserProfile from "./UserProfile";
 import { useNavigate } from "react-router-dom";
 import Header from "../layout/Header";
+import { useEffect } from "react";
 
 function App() {
   // const { count } = useSelector((state) => state.user);
@@ -17,6 +18,12 @@ function App() {
   const dispatch = useDispatch();
 
   let navigate = useNavigate();
+
+  useEffect(() => {
+    if (user.token) {
+      navigate("/user");
+    }
+  });
 
   return (
     <>

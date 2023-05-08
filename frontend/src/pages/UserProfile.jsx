@@ -16,14 +16,26 @@ function UserProfile() {
   const dispatch = useDispatch();
   // dispatch(setProfile(profileResponse.data.body));
 
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
 
   // function handleCollapsed() {
   //   setCollapsed(true);
   // }
 
+  const handleOpacity = () => {
+    const mainPage = document.querySelector(".main");
+    let value = 0;
+    if (collapsed) {
+      value = 0.2;
+    } else {
+      value = 1;
+    }
+    mainPage.style.opacity = value;
+  };
+
   const handleCloseModal = () => {
-    setCollapsed(false);
+    setCollapsed(true);
+    handleOpacity();
   };
 
   useEffect(() => {
@@ -39,7 +51,7 @@ function UserProfile() {
 
   return (
     <div>
-      {collapsed && <Modal onClose={handleCloseModal} />}
+      {!collapsed && <Modal onClose={handleCloseModal} />}
 
       <main className="main bg-dark">
         <div className="header">
@@ -50,7 +62,10 @@ function UserProfile() {
           </h1>
           <button
             className="edit-button"
-            onClick={() => setCollapsed(!collapsed)}
+            onClick={() => {
+              setCollapsed(!collapsed);
+              handleOpacity();
+            }}
           >
             Edit Name
           </button>

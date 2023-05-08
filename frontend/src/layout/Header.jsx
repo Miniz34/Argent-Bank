@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import bankLogo from "../assets/argentBankLogo.png";
 import { resetUser } from "../store/user";
@@ -14,53 +14,53 @@ function Header({ status }) {
 
   return (
     <nav className="main-nav">
-      <Link to="/" className="main-nav-logo">
+      <NavLink to="/" className="main-nav-logo">
         <img
           className="main-nav-logo-image"
           src={bankLogo}
           alt="Argent Bank Logo"
         />
         <h1 className="sr-only">Argent Bank</h1>
-      </Link>
+      </NavLink>
 
       <div>
         {user.token && (
-          <Link to="/user" className="main-nav-item">
+          <NavLink to="/login" className="main-nav-item" onClick={logout}>
             <i className="fa fa-user-circle"></i>
             {user.firstName}
-          </Link>
+          </NavLink>
         )}
         {status === "home-page" && (
           <>
             {!user.token ? (
-              <Link to="/login" className="main-nav-item">
+              <NavLink to="/login" className="main-nav-item">
                 <i className="fa fa-user-circle"></i>
                 Sign In
-              </Link>
+              </NavLink>
             ) : (
-              <Link to="/" className="main-nav-item" onClick={logout}>
+              <NavLink to="/" className="main-nav-item" onClick={logout}>
                 <i className="fa fa-sign-out"></i>
                 Sign Out
-              </Link>
+              </NavLink>
             )}
           </>
         )}
 
         {status === "login-page" && (
           <>
-            <a className="main-nav-item" href="/">
+            <NavLink className="main-nav-item" to="/">
               <i className="fa fa-user-circle"></i>
               Sign In
-            </a>
+            </NavLink>
           </>
         )}
 
         {status === "user-page" && (
           <>
-            <Link to="/" className="main-nav-item" onClick={logout}>
+            <NavLink to="/" className="main-nav-item" onClick={logout}>
               <i className="fa fa-sign-out"></i>
               Sign Out
-            </Link>
+            </NavLink>
           </>
         )}
       </div>
