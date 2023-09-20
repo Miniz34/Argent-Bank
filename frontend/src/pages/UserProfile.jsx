@@ -12,15 +12,8 @@ function UserProfile() {
   console.log(user.firstName);
 
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
-  // dispatch(setProfile(profileResponse.data.body));
-
   const [collapsed, setCollapsed] = useState(true);
-
-  // function handleCollapsed() {
-  //   setCollapsed(true);
-  // }
 
   const handleOpacity = () => {
     const mainPage = document.querySelector(".main");

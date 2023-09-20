@@ -1,21 +1,14 @@
 import "../App.css";
 import securityIcon from "../assets/icon-security.png";
-import bankLogo from "../assets/argentBankLogo.png";
 import chatIcon from "../assets/icon-chat.png";
 import moneyIcon from "../assets/icon-money.png";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
-import Login from "./Login";
-import UserProfile from "./UserProfile";
 import { useNavigate } from "react-router-dom";
-import Header from "../layout/Header";
 import { useEffect } from "react";
 
 function App() {
-  // const { count } = useSelector((state) => state.user);
   const user = useSelector((state) => state.user);
-  const dispatch = useDispatch();
 
   let navigate = useNavigate();
 

@@ -46,7 +46,4 @@ function Router() {
     </React.StrictMode>
   );
 }
-
 export default Router;
-
-// http://localhost:3001/api/v1/user/signup

@@ -1,10 +1,7 @@
 import "../App.css";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import "./Modal.css";
 
-import { useNavigate } from "react-router";
-import { setUser, setProfile, resetUser, modifyUser } from "../store/user";
+import { modifyUser } from "../store/user";
 import api from "../utils/API";
 import svg from "../assets/cross.svg";
 
@@ -54,9 +51,6 @@ function Modal({ onClose }) {
       <div className="modal-content">
         <div className="modal-header">
           <h2 className="modal-title">Modifier le nom</h2>
-          {/* <button className="modal-close" onClick={onClose}>
-            Close
-          </button> */}
         </div>
 
         <img
@@ -68,21 +62,11 @@ function Modal({ onClose }) {
 
         <form className="modal-form">
           <label htmlFor="firstName">First Name</label>
-          <input
-            type="text"
-            id="firstName"
-            placeholder={user.firstName}
-            // onChange={(e) => setFirstName(e.target.value)}
-          />
+          <input type="text" id="firstName" placeholder={user.firstName} />
           <label htmlFor="lastName" className="modal-lastname">
             Last Name
           </label>
-          <input
-            type="text"
-            id="lastName"
-            placeholder={user.lastName}
-            // onChange={(e) => setLastName(e.target.value)}
-          />
+          <input type="text" id="lastName" placeholder={user.lastName} />
           <button
             type="submit"
             onClick={submitModal}

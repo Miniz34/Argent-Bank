@@ -6,7 +6,6 @@ import { resetUser } from "../store/user";
 function Header({ status }) {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  // dispatch(setProfile(profileResponse.data.body));
 
   const logout = () => {
     dispatch(resetUser(user));

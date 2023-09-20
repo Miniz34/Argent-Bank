@@ -1,10 +1,7 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
-import { setUser, setProfile } from './user'
-import navigate from '../utils/navigate';
+import { createAsyncThunk } from '@reduxjs/toolkit'
+import { setUser } from './user'
 import api from "../utils/API"
 
-// Set token/connected
 
 import { useSelector } from "react-redux";
 
@@ -19,8 +16,6 @@ export const loginUser = createAsyncThunk(
       if (response.status !== 200)
         throw new Error("Filler");
       thunkAPI.dispatch(setUser(response.data.body));
-      // const profileResponse = await api.user.get(response.data.body.token)
-      // thunkAPI.dispatch(setProfile(profileResponse.data.body));
       return response.data.body.token;
     } catch (error) {
       // handle error
@@ -43,26 +38,6 @@ export const loginUser = createAsyncThunk(
     }
   }
 );
-
-// export const getUser = createAsyncThunk(
-//   'user/get',
-
-//   async ({ token }, thunkAPI) => {
-//     try {
-//       const response = await api.user.get(token)
-//       console.log("razezae")
-//       if (response.status !== 200)
-//         throw new Error("Filler");
-//       thunkAPI.dispatch(setProfile(response.data.body));
-//       return response.data.body
-
-//     } catch (error) {
-//       console.log(error)
-//     } finally {
-//       console.log("help")
-//     }
-//   }
-// )
 
 
 
