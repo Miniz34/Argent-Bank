@@ -4,7 +4,7 @@ import { getUser } from './login'
 
 
 const initialState = {
-  isConnected: false,
+  isConnected: localStorage.getItem("token") ? true : false,
   token: localStorage.getItem("token") || null,
   id: null,
   email: null,

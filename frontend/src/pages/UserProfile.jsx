@@ -9,7 +9,7 @@ import Modal from "../components/Modal";
 
 function UserProfile() {
   const user = useSelector((state) => state.user);
-  console.log(user.firstName);
+  console.log(user);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();

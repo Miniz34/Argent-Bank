@@ -24,7 +24,7 @@ function Header({ status }) {
 
       <div>
         {user.token && (
-          <NavLink to="/login" className="main-nav-item" onClick={logout}>
+          <NavLink to="/user" className="main-nav-item">
             <i className="fa fa-user-circle"></i>
             {user.firstName}
           </NavLink>
