@@ -12,7 +12,7 @@ const initialState = {
   lastName: null,
   createdAt: null,
   updatedAt: null,
-  rememberMe: localStorage.getItem("rememberMe") || false
+  rememberMe: localStorage.getItem("rememberMe") === "true" ? true : false
 }
 
 export const userSlice = createSlice({
