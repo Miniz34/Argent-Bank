@@ -1,11 +1,11 @@
 swagger: "2.0"
 info:
   title: Argent Bank Transaction API
-  description: API model proposal for user transactions
+  description: API model for user transactions
   version: 2.0.0
   termsOfService: http://swagger.io/terms/
 host: localhost:3001
-basePath: /api/v2
+basePath: /api/v1/transactions
 schemes:
   - http
 paths:
@@ -15,8 +15,8 @@ paths:
         - Bearer: []
       tags:
         - Transaction module
-      summary: All transactions API
-      description: API for fetching all transactions
+      summary: Transactions Current Month API
+      description: API for fetching current month transactions
       parameters:
         - in: header
           name: Authorization
@@ -29,7 +29,9 @@ paths:
         "200":
           description: User transactions retrieved successfully
           schema:
-            $ref: "#/definitions/allTransactionsResponse"
+            type: array
+            items:
+              $ref: "#/definitions/ApiTransactionResponse"
         "400":
           description: Invalid Fields
         "401":
@@ -61,14 +63,14 @@ paths:
       produces:
         - application/json
       responses:
-        "200":
+        "201":
           description: Transaction added successfully
           schema:
             $ref: "#/definitions/ApiTransactionResponse"
         "400":
           description: Invalid Fields
-        "401":
-          description: Unauthorized
+        "403":
+          description: Forbidden
         "500":
           description: Internal Server Error
   /user/transaction/{idTransaction}:
@@ -77,8 +79,8 @@ paths:
         - Bearer: []
       tags:
         - Transaction module
-      summary: Specific transaction API
-      description: API for showing a specific transaction
+      summary: Transaction Show API
+      description: API for showing a transaction
       parameters:
         - in: header
           name: Authorization
@@ -97,10 +99,8 @@ paths:
           description: Transaction retrieved successfully
           schema:
             $ref: "#/definitions/ApiTransactionResponse"
-        "400":
-          description: Invalid Fields
-        "401":
-          description: Unauthorized
+        "403":
+          description: Forbidden
         "404":
           description: Transaction not found
         "500":
@@ -138,8 +138,8 @@ paths:
             $ref: "#/definitions/ApiTransactionResponse"
         "400":
           description: Invalid Fields
-        "401":
-          description: Unauthorized
+        "403":
+          description: Forbidden
         "404":
           description: Transaction not found
         "500":
@@ -162,15 +162,12 @@ paths:
           description: Id of the transaction that needs to be deleted
           required: true
           type: string
-      produces:
-        - application/json
+
       responses:
         "200":
           description: Transaction deleted successfully
-        "400":
-          description: Invalid Fields
-        "401":
-          description: Unauthorized
+        "403":
+          description: Forbidden
         "404":
           description: Transaction not found
         "500":
@@ -181,108 +178,93 @@ securityDefinitions:
     name: Authorization
     in: header
 definitions:
-  allTransactionsResponse:
-    properties:
-      status:
-        type: integer
-      message:
-        type: string
-      body:
-        type: object
-        properties:
-          transaction_0:
-            type: object
-            description: First transaction
-            properties:
-              id:
-                type: string
-                description: Id of the first transaction
-              date:
-                type: string
-                description: Date of the first transaction
-              amount:
-                type: number
-                description: Amount of the first transaction
-              description:
-                type: string
-                description: Description of the first transaction
-              category:
-                type: string
-                description: Category of the first transaction
-              notes:
-                type: string
-                description: Notes of the first transaction
-          transaction_1:
-            type: object
-            description: Second transaction
-            properties:
-              id:
-                type: string
-                description: Id of the second transaction
-              date:
-                type: string
-                description: Date of the second transaction
-              amount:
-                type: number
-                description: Amount of the second transaction
-              description:
-                type: string
-                description: Description of the second transaction
-              category:
-                type: string
-                description: Category of the second transaction
-              notes:
-                type: string
-                description: Notes of the second transaction
-          transaction_2:
-            type: object
-            description: Third transaction
-            properties:
-              id:
-                type: string
-                description: Id of the third transaction
-              date:
-                type: string
-                description: Date of the third transaction
-              amount:
-                type: number
-                description: Amount of the third transaction
-              description:
-                type: string
-                description: Description of the third transaction
-              category:
-                type: string
-                description: Category of the third transaction
-              notes:
-                type: string
-                description: Notes of the third transaction
+  # allTransactionsResponse:
+  #             type: array
+  #             properties:
+  #                 transaction_0:
+  #                     type: object
+  #                     description: First transaction
+  #                     properties:
+  #                         id:
+  #                             type: string
+  #                             description: Id of the first transaction
+  #                         date:
+  #                             type: string
+  #                             description: Date of the first transaction
+  #                         amount:
+  #                             type: number
+  #                             description: Amount of the first transaction
+  #                         description:
+  #                             type: string
+  #                             description: Description of the first transaction
+  #                         category:
+  #                             type: string
+  #                             description: Category of the first transaction
+  #                         notes:
+  #                             type: string
+  #                             description: Notes of the first transaction
+  #                 transaction_1:
+  #                     type: object
+  #                     description: Second transaction
+  #                     properties:
+  #                         id:
+  #                             type: string
+  #                             description: Id of the second transaction
+  #                         date:
+  #                             type: string
+  #                             description: Date of the second transaction
+  #                         amount:
+  #                             type: number
+  #                             description: Amount of the second transaction
+  #                         description:
+  #                             type: string
+  #                             description: Description of the second transaction
+  #                         category:
+  #                             type: string
+  #                             description: Category of the second transaction
+  #                         notes:
+  #                             type: string
+  #                             description: Notes of the second transaction
+  #                 transaction_2:
+  #                     type: object
+  #                     description: Third transaction
+  #                     properties:
+  #                         id:
+  #                             type: string
+  #                             description: Id of the third transaction
+  #                         date:
+  #                             type: string
+  #                             description: Date of the third transaction
+  #                         amount:
+  #                             type: number
+  #                             description: Amount of the third transaction
+  #                         description:
+  #                             type: string
+  #                             description: Description of the third transaction
+  #                         category:
+  #                             type: string
+  #                             description: Category of the third transaction
+  #                         notes:
+  #                             type: string
+  #                             description: Notes of the third transaction
   ApiTransactionResponse:
+    type: object
     properties:
-      status:
-        type: integer
-      message:
+      id:
         type: string
-      body:
-        type: object
-        properties:
-          id:
-            type: string
-            description: Id of the transaction
-          date:
-            type: string
-            description: Date of the transaction
-          amount:
-            type: number
-            description: Amount of the transaction
-          description:
-            type: string
-            description: Description of the transaction
-          category:
-            type: string
-            description: Category of the transaction
-          notes:
-            type: string
-            description: Notes of the transaction
+        description: Id of the transaction
+      date:
+        type: string
+        description: Date of the transaction
+      amount:
+        type: number
+        description: Amount of the transaction
+      description:
+        type: string
+        description: Description of the transaction
+      category:
+        type: string
+        description: Category of the transaction
   addTransaction:
     properties:
       accountId:
@@ -305,6 +287,6 @@ definitions:
       category:
         type: string
         description: New category of this transaction
-      notes:
+      description:
         type: string
         description: New notes of this transaction
