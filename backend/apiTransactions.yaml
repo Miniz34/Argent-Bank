@@ -16,11 +16,16 @@ paths:
       tags:
         - Transaction module
       summary: Transactions Current Month API
-      description: API for fetching current month transactions
+      description: API for fetching transactions for a specific month
       parameters:
         - in: header
           name: Authorization
           description: Attach Bearer JWT token
+          required: true
+          type: string
+        - in: query
+          name: Month
+          description: Select a specific month to fetch the transactions (e.g., "09-2023")
           required: true
           type: string
       produces:
@@ -35,7 +40,7 @@ paths:
         "403":
           description: Forbidden
         "404":
-          description: Transaction not found
+          description: Transactions not found
         "500":
           description: Internal Server Error
   /user/transaction:
@@ -176,75 +181,6 @@ securityDefinitions:
     name: Authorization
     in: header
 definitions:
-  # allTransactionsResponse:
-  #             type: array
-  #             properties:
-  #                 transaction_0:
-  #                     type: object
-  #                     description: First transaction
-  #                     properties:
-  #                         id:
-  #                             type: string
-  #                             description: Id of the first transaction
-  #                         date:
-  #                             type: string
-  #                             description: Date of the first transaction
-  #                         amount:
-  #                             type: number
-  #                             description: Amount of the first transaction
-  #                         description:
-  #                             type: string
-  #                             description: Description of the first transaction
-  #                         category:
-  #                             type: string
-  #                             description: Category of the first transaction
-  #                         notes:
-  #                             type: string
-  #                             description: Notes of the first transaction
-  #                 transaction_1:
-  #                     type: object
-  #                     description: Second transaction
-  #                     properties:
-  #                         id:
-  #                             type: string
-  #                             description: Id of the second transaction
-  #                         date:
-  #                             type: string
-  #                             description: Date of the second transaction
-  #                         amount:
-  #                             type: number
-  #                             description: Amount of the second transaction
-  #                         description:
-  #                             type: string
-  #                             description: Description of the second transaction
-  #                         category:
-  #                             type: string
-  #                             description: Category of the second transaction
-  #                         notes:
-  #                             type: string
-  #                             description: Notes of the second transaction
-  #                 transaction_2:
-  #                     type: object
-  #                     description: Third transaction
-  #                     properties:
-  #                         id:
-  #                             type: string
-  #                             description: Id of the third transaction
-  #                         date:
-  #                             type: string
-  #                             description: Date of the third transaction
-  #                         amount:
-  #                             type: number
-  #                             description: Amount of the third transaction
-  #                         description:
-  #                             type: string
-  #                             description: Description of the third transaction
-  #                         category:
-  #                             type: string
-  #                             description: Category of the third transaction
-  #                         notes:
-  #                             type: string
-  #                             description: Notes of the third transaction
   ApiTransactionResponse:
     type: object
     properties:
